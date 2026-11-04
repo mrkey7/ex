@@ -141,3 +141,35 @@ body:not(.exam-active) .file-choice{font-size:18px;line-height:1.5}
 body:not(.exam-active) .file-picker-row input{font-size:16px}
 body:not(.exam-active) .file-picker-row input::file-selector-button{font-size:16px;padding:11px 14px}
 body:not(.exam-active) .file-status{font-size:16px!important;line-height:1.5}
+
+
+/* Halaman pemilihan peserta: memenuhi area dan teks lebih besar */
+body.uh-mode:not(.exam-active) main{align-items:stretch;justify-content:stretch}
+body.uh-mode:not(.exam-active) #appPanel{display:flex;flex:1 1 auto;min-height:0}
+body.uh-mode:not(.exam-active) #homeScreen{display:flex;flex:1 1 auto;min-height:0;flex-direction:column}
+body.uh-mode:not(.exam-active) .start-grid{flex:1 1 auto;align-items:stretch}
+body.uh-mode:not(.exam-active) .start-card{padding:26px}
+body.uh-mode:not(.exam-active) .start-card h3{font-size:25px}
+body.uh-mode:not(.exam-active) .start-card>p{font-size:18px;line-height:1.6}
+body.uh-mode:not(.exam-active) .start-card-icon{width:44px;height:44px;font-size:23px}
+body.uh-mode:not(.exam-active) .exam-facts{gap:14px;padding-top:20px}
+body.uh-mode:not(.exam-active) .exam-facts span{font-size:13px}
+body.uh-mode:not(.exam-active) .exam-facts strong{font-size:32px}
+body.uh-mode:not(.exam-active) .anonymous-card .primary-button{font-size:17px;padding:16px}
+body.uh-mode:not(.exam-active) .identity-heading .eyebrow{font-size:13px}
+body.uh-mode:not(.exam-active) .muted-inline{font-size:14px}
+body.uh-mode:not(.exam-active) .identity-card input{height:50px;font-size:18px}
+body.uh-mode:not(.exam-active) .identity-card select{font-size:18px;line-height:1.65}
+body.uh-mode:not(.exam-active) .selected-student{font-size:15px}
+body.uh-mode:not(.exam-active) .identity-actions button{font-size:15px;padding:14px 17px}
+body.uh-mode:not(.exam-active) .participant-hint{font-size:13px!important}
+body.uh-mode:not(.exam-active) .home-bottom{margin-top:10px;padding-top:9px}
+body.uh-mode:not(.exam-active) .home-bottom .muted-note{display:block;font-size:13px;line-height:1.4}
+body.uh-mode:not(.exam-active) .footer{font-size:11px;padding:3px 18px 5px}
+@media(max-width:700px){
+  body.uh-mode:not(.exam-active) .start-card{padding:18px}
+  body.uh-mode:not(.exam-active) .start-card h3{font-size:22px}
+  body.uh-mode:not(.exam-active) .start-card>p{font-size:16px}
+  body.uh-mode:not(.exam-active) .exam-facts strong{font-size:28px}
+  body.uh-mode:not(.exam-active) .identity-card select{height:clamp(100px,22dvh,165px)}
+}
