@@ -134,3 +134,10 @@ body:not(.exam-active) .file-status{font-size:13px!important}
 @media(max-width:700px){
   body:not(.exam-active) .hero h1{font-size:27px}
 }
+
+/* Teks panel pemilihan file dan worksheet */
+body:not(.exam-active) .file-panel p{font-size:18px;line-height:1.65}
+body:not(.exam-active) .file-choice{font-size:18px;line-height:1.5}
+body:not(.exam-active) .file-picker-row input{font-size:16px}
+body:not(.exam-active) .file-picker-row input::file-selector-button{font-size:16px;padding:11px 14px}
+body:not(.exam-active) .file-status{font-size:16px!important;line-height:1.5}
