@@ -181,3 +181,8 @@ body.uh-mode:not(.exam-active) .participant-hint,
 body.uh-mode:not(.exam-active) .home-bottom .muted-note{display:none!important}
 body.uh-mode:not(.exam-active) .identity-card select{height:auto;min-height:0;flex:1 1 auto}
 body.uh-mode:not(.exam-active) .identity-footer{padding-top:10px}
+
+/* Jumlah peserta mengikuti hasil pencarian */
+body.uh-mode:not(.exam-active) .student-search-row{display:flex;align-items:center;gap:14px}
+body.uh-mode:not(.exam-active) .student-search-row input{flex:1;min-width:0}
+body.uh-mode:not(.exam-active) .student-search-row .muted-inline{font-size:15px;flex:0 0 auto}
