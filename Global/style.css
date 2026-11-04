@@ -116,3 +116,21 @@ body.canvas-desktop.uh-mode #appCanvas,body.canvas-desktop.exam-active #appCanva
   #appCanvas{position:static;width:auto;height:auto;min-height:0;transform:none;overflow:visible}
   .zoom-controls{display:none}
 }
+
+/* Ukuran teks halaman awal */
+body:not(.exam-active){font-size:16px}
+body:not(.exam-active) .hero h1{font-size:32px}
+body:not(.exam-active) .hero p,
+body:not(.exam-active) .home-heading p,
+body:not(.exam-active) .file-panel p{font-size:15px;line-height:1.6}
+body:not(.exam-active) .eyebrow{font-size:11px}
+body:not(.exam-active) .file-panel h2{font-size:20px}
+body:not(.exam-active) .home-heading h2{font-size:25px}
+body:not(.exam-active) .start-card h3{font-size:19px}
+body:not(.exam-active) .start-card>p{font-size:15px}
+body:not(.exam-active) .primary-button,
+body:not(.exam-active) .secondary-button{font-size:14px}
+body:not(.exam-active) .file-status{font-size:13px!important}
+@media(max-width:700px){
+  body:not(.exam-active) .hero h1{font-size:27px}
+}
