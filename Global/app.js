@@ -782,7 +782,7 @@ async function loadWorkbook(file) {
         const buffer = await file.arrayBuffer();
         const workbook = await openXlsx(buffer);
         const questions = parseQuestions(await readWorksheet(workbook, state.config.sheetSoal));
-        if (state.config.jumlahSoal > questions.length) {
+        if (state.config.rekap && state.config.jumlahSoal > questions.length) {
             throw new Error(`jumlah_soal=${state.config.jumlahSoal}, tetapi soal valid hanya ${questions.length}. Kurangi jumlah_soal atau lengkapi bank soal.`);
         }
 
