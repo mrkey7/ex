@@ -106,7 +106,7 @@ body.uh-mode .footer{padding-bottom:10px}
 .zoom-controls output{min-width:42px;text-align:center;color:#d5e7dc;font-size:10px;font-variant-numeric:tabular-nums}
 #canvasViewport{width:100%;height:calc(100dvh - 68px);overflow:hidden;position:relative}
 #canvasViewport::before{display:none}
-#appCanvas{display:flex;flex-direction:column;position:absolute;top:0;left:0;width:100%;height:100%;min-height:0;overflow:hidden;transform:scale(var(--canvas-scale,1));transform-origin:top left}
+#appCanvas{display:flex;flex-direction:column;position:absolute;top:50%;left:50%;width:100%;height:100%;min-height:0;overflow:hidden;transform:translate(-50%,-50%) scale(var(--canvas-scale,1));transform-origin:center center}
 #appCanvas main{flex:1 1 auto;min-height:0}
 body.canvas-desktop{height:100dvh;overflow:hidden}
 body.canvas-desktop.uh-mode #appCanvas,body.canvas-desktop.exam-active #appCanvas{min-height:0}
