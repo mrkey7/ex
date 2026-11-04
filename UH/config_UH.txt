@@ -1,2 +1,3 @@
 soal;20
 durasi;30
+rekap;1
