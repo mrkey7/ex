@@ -25,8 +25,8 @@
         viewport.style.height = availableHeight + "px";
         canvas.style.height = availableHeight + "px";
         canvas.style.setProperty("--canvas-scale", zoom);
-        canvas.style.left = Math.max(0, (availableWidth - width) / 2) + "px";
-        canvas.style.top = Math.max(0, (availableHeight - height) / 2) + "px";
+        canvas.style.left = (availableWidth - width) / 2 + "px";
+        canvas.style.top = (availableHeight - height) / 2 + "px";
         level.textContent = Math.round(zoom * 100) + "%";
     }
 
