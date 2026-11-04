@@ -599,7 +599,7 @@ function renderParticipants(filter = "") {
         option.textContent = person.rombel ? `${person.name}  ·  ${person.rombel}` : person.name;
         ui.studentSelect.append(option);
     }
-    ui.studentCount.textContent = state.participants.length ? `${state.participants.length} peserta` : "";
+    ui.studentCount.textContent = `${matching.length} peserta`;
     if ([...ui.studentSelect.options].some(option => option.value === previous)) ui.studentSelect.value = previous;
     else ui.studentSelect.selectedIndex = -1;
     updateSelectedStudent();
