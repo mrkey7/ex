@@ -23,7 +23,7 @@ const ui = {
     fileStatus: $("fileStatus"),
     appPanel: $("appPanel"), homeScreen: $("homeScreen"),
     homeDescription: $("homeDescription"), homeQuestionCount: $("homeQuestionCount"),
-    homeDuration: $("homeDuration"), anonymousStartButton: $("anonymousStartButton"), skipIdentityButton: $("skipIdentityButton"),
+    homeDuration: $("homeDuration"), anonymousStartButton: $("anonymousStartButton"),
     identityPanel: $("identityPanel"), participantHint: $("participantHint"),
     studentSearch: $("studentSearch"), studentSelect: $("studentSelect"), studentCount: $("studentCount"),
     selectedStudent: $("selectedStudent"), startExamButton: $("startExamButton"),
@@ -390,7 +390,7 @@ function renderSettings() {
     ui.participantHint.textContent = state.participantError || (state.participants.length
         ? "Pilih nama untuk mencatat hasil ke rekap."
         : "Daftar peserta belum tersedia. Anda tetap dapat mulai tanpa nama.");
-    ui.studentCount.textContent = state.participants.length ? `${state.participants.length} peserta` : "";
+    ui.studentCount.textContent = `${matching.length} peserta`;
     ui.exportButton.classList.toggle("hidden", !config.rekap || state.results.length === 0);
 }
 
