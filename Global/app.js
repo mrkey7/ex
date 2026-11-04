@@ -390,7 +390,7 @@ function renderSettings() {
     ui.participantHint.textContent = state.participantError || (state.participants.length
         ? "Pilih nama untuk mencatat hasil ke rekap."
         : "Daftar peserta belum tersedia. Anda tetap dapat mulai tanpa nama.");
-    ui.studentCount.textContent = `${matching.length} peserta`;
+    ui.studentCount.textContent = `${state.participants.length} peserta`;
     ui.exportButton.classList.toggle("hidden", !config.rekap || state.results.length === 0);
 }
 
