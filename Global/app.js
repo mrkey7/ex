@@ -70,10 +70,12 @@ function parseConfig(text, mode) {
         settings[line.slice(0, splitAt).trim().toLowerCase()] = line.slice(splitAt + 1).trim();
     }
     if (mode === "UH") {
-        const jumlahSoal = Number(settings.soal), durasi = Number(settings.durasi);
-        if (!Number.isInteger(jumlahSoal) || jumlahSoal < 1) throw new Error("soal harus berupa bilangan bulat minimal 1.");
-        if (!Number.isFinite(durasi) || durasi < 0) throw new Error("durasi harus berupa angka 0 atau lebih.");
-        return { fileExcel: "", sheetSoal: "Soal", sheetPeserta: "Peserta", jumlahSoal, durasiMenit: durasi, acakNo: true, acakPilihan: true, rekap: true };
+        if (settings.rekap !== "0" && settings.rekap !== "1") throw new Error("rekap hanya boleh bernilai 0 atau 1.");
+        const rekap = settings.rekap === "1";
+        const jumlahSoal = rekap ? Number(settings.soal) : 0, durasi = rekap ? Number(settings.durasi) : 0;
+        if (rekap && (!Number.isInteger(jumlahSoal) || jumlahSoal < 1)) throw new Error("soal harus berupa bilangan bulat minimal 1.");
+        if (rekap && (!Number.isFinite(durasi) || durasi < 0)) throw new Error("durasi harus berupa angka 0 atau lebih.");
+        return { fileExcel: "", sheetSoal: "Soal", sheetPeserta: "Peserta", jumlahSoal, durasiMenit: durasi, acakNo: true, acakPilihan: true, rekap };
     }
     const required = ["sheet_soal", "jumlah_soal", "durasi", "acak_no", "acak_pilihan", "rekap"];
     const missing = required.filter(key => settings[key] === undefined || settings[key] === "");
@@ -419,7 +421,7 @@ function buildExamQuestions(questionCount = state.config.jumlahSoal) {
 }
 
 function startExam(participant = null) {
-    const total = state.config.jumlahSoal;
+    const total = state.config.rekap ? state.config.jumlahSoal : state.questions.length;
     if (!Number.isInteger(total) || total < 1 || total > state.questions.length) {
         toast(`Jumlah soal harus antara 1 dan ${state.questions.length}.`);
         return;
@@ -813,6 +815,7 @@ async function loadWorkbook(file) {
             ? "Pilih nama bila ingin mencatat hasil, atau mulai tanpa nama."
             : "Mulai tanpa nama untuk melihat nilai tanpa menyimpan rekap.";
         ui.statusLabel.textContent = "SIAP";
+        if (!state.config.rekap) startExam(null);
     } catch (error) {
         state.workbook = null;
         state.questions = [];
