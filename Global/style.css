@@ -173,3 +173,11 @@ body.uh-mode:not(.exam-active) .footer{font-size:11px;padding:3px 18px 5px}
   body.uh-mode:not(.exam-active) .exam-facts strong{font-size:28px}
   body.uh-mode:not(.exam-active) .identity-card select{height:clamp(100px,22dvh,165px)}
 }
+
+/* UH: halaman peserta ringkas, daftar nama memakai ruang utama */
+body.uh-mode:not(.exam-active) .identity-card{display:flex;flex-direction:column}
+body.uh-mode:not(.exam-active) .identity-heading,
+body.uh-mode:not(.exam-active) .participant-hint,
+body.uh-mode:not(.exam-active) .home-bottom .muted-note{display:none!important}
+body.uh-mode:not(.exam-active) .identity-card select{height:auto;min-height:0;flex:1 1 auto}
+body.uh-mode:not(.exam-active) .identity-footer{padding-top:10px}
