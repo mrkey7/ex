@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#153b32">
+  <title>Ujian Harian</title>
+  <link rel="stylesheet" href="../Global/style.css?v=13">
+  <script>const refreshKey = new URLSearchParams(location.search).get("_r"); if (refreshKey) document.querySelector('link[rel="stylesheet"]').href += "&_r=" + encodeURIComponent(refreshKey);</script>
+</head>
+<body>
+  <header class="topbar">
+      <div class="brand">
+        <div class="brand-mark">UH</div>
+        <div><div class="brand-name">Ujian Harian</div><div class="brand-caption">Aplikasi ujian offline</div></div>
+      </div>
+      <div class="topbar-actions"><div class="zoom-controls" aria-label="Kontrol zoom"><button id="zoomOutButton" type="button" title="Perkecil tampilan" aria-label="Zoom out">−</button><output id="zoomLevel">100%</output><button id="zoomInButton" type="button" title="Perbesar tampilan" aria-label="Zoom in">+</button><button id="zoomRestoreButton" type="button" title="Kembalikan ukuran awal" aria-label="Restore zoom">↺</button></div><button id="refreshCacheButton" class="refresh-cache-button" type="button" title="Bersihkan cache aplikasi dan muat ulang versi terbaru" aria-label="Bersihkan cache dan muat ulang">R</button><div class="offline-pill"><span class="status-dot"></span> Lokal · Offline</div></div>
+  </header>
+
+  <div id="canvasViewport"><div id="appCanvas" class="app-shell">
+    <main>
+      <section class="hero hidden">
+        <div><h1 id="pageTitle">Memuat aplikasi</h1><p id="pageSubtitle">Menyiapkan halaman ujian.</p></div>
+        <div class="step-chip"><span class="pulse"></span><span id="statusLabel">MEMUAT</span></div>
+      </section>
+
+      <section id="loadingPanel" class="panel loading-panel">
+        <div class="spinner"></div>
+        <div><strong>Menyiapkan aplikasi</strong><p id="loadingText">Memuat konfigurasi…</p></div>
+      </section>
+
+      <section id="filePanel" class="panel file-panel hidden">
+        <div class="file-panel-icon">↑</div>
+        <div class="file-panel-content">
+          <div class="file-choice-row">
+            <div class="file-choice"></div>
+            <button id="btnTemplate" class="secondary-button template-button" type="button">Unduh Template Excel ↓</button>
+          </div>
+          <div class="file-divider"></div>
+          <p>Pastikan nama worksheet sesuai dengan pengaturan aplikasi.</p>
+          <div class="file-picker-row">
+            <input id="workbookInput" type="file" accept=".xlsx,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet">
+          </div>
+          <p id="fileStatus" class="file-status">Belum ada file yang dipilih.</p>
+        </div>
+      </section>
+
+      <section id="errorPanel" class="panel error-panel hidden">
+        <div class="error-mark">!</div>
+        <div><h2>Aplikasi belum siap</h2><p id="errorMessage"></p><p class="error-hint">Periksa pengaturan.txt dan file Excel, lalu jalankan ulang Buka_Ujian.bat.</p></div>
+      </section>
+
+      <section id="appPanel" class="hidden">
+        <section id="homeScreen" class="panel home-panel">
+          <div class="home-heading">
+            <div>
+              <div class="eyebrow">UJIAN HARIAN</div>
+              <h2>Siap memulai?</h2>
+              <p id="homeDescription">Pilih nama bila hasil ingin dicatat. Tanpa nama, hasil tidak masuk rekap.</p>
+            </div>
+            <div class="home-icon">✓</div>
+          </div>
+
+          <div class="start-grid">
+            <section class="start-card anonymous-card">
+              <div class="start-card-icon">→</div>
+              <h3>Mulai tanpa nama</h3>
+              <p>Kerjakan soal tanpa memilih identitas. Nilai tetap ditampilkan, tetapi tidak dicatat ke rekap.</p>
+              <div class="exam-facts">
+                <div><span>JUMLAH SOAL</span><strong id="homeQuestionCount">20</strong></div>
+                <div><span>DURASI</span><strong id="homeDuration">30 menit</strong></div>
+              </div>
+              <button id="anonymousStartButton" class="primary-button" type="button">Mulai ujian →</button>
+            </section>
+
+            <section id="identityPanel" class="start-card identity-card">
+              <div class="identity-heading">
+                <div><div class="eyebrow">OPSIONAL</div><h3>Dengan nama peserta</h3></div>
+                <span id="studentCount" class="muted-inline"></span>
+              </div>
+              <p>Hasil ujian akan masuk ke rekap dengan identitas peserta yang dipilih.</p>
+              <input id="studentSearch" type="search" placeholder="Cari nama peserta…" autocomplete="off" aria-label="Cari nama peserta">
+              <select id="studentSelect" size="8" aria-label="Daftar nama peserta"></select>
+              <div class="identity-footer">
+                <div class="selected-student" id="selectedStudent">Pilih nama dari daftar.</div>
+                <button id="startExamButton" class="primary-button" type="button" disabled>Mulai dengan nama →</button>
+              </div>
+              <p id="participantHint" class="participant-hint"></p>
+            </section>
+          </div>
+
+          <div class="home-bottom">
+            <span class="muted-note" id="homeHint">Pengerjaan dapat diakhiri kapan saja melalui tombol Selesai.</span>
+            <button id="exportButton" class="secondary-button hidden" type="button">Unduh Rekap Excel ↓</button>
+          </div>
+        </section>
+
+        <section id="examScreen" class="hidden">
+          <div class="exam-topline">
+            <div class="exam-identity">
+              <strong id="examParticipantName">Tanpa nama</strong>
+              <span id="examQuestionCount">20 SOAL</span>
+            </div>
+            <div class="timer-box"><span id="timerLabel">SISA WAKTU</span><strong id="timer">30:00</strong></div>
+          </div>
+          <div class="progress-track"><div id="progressFill"></div></div>
+          <div class="exam-layout">
+            <section class="panel question-panel">
+              <div class="question-head"><span id="questionNumber" class="question-number">SOAL 1</span></div>
+              <div id="questionText" class="question-text"></div>
+              <div id="optionsList" class="options-list"></div>
+              <div class="question-controls"><button id="prevQuestion" class="secondary-button" type="button">← Sebelumnya</button><button id="nextQuestion" class="primary-button" type="button">Berikutnya →</button></div>
+            </section>
+            <aside class="panel navigator-panel">
+              <div class="navigator-title"><strong>Navigasi soal</strong><span id="navProgress">0/20</span></div>
+              <div id="questionNav" class="question-nav"></div>
+              <div class="legend"><span><i class="legend-current"></i> Aktif</span><span><i class="legend-answered"></i> Terjawab</span><span><i class="legend-empty"></i> Kosong</span></div>
+              <button id="finishExamButton" class="finish-button" type="button">Selesai ✓</button>
+            </aside>
+          </div>
+        </section>
+
+        <section id="resultScreen" class="panel result-panel hidden">
+          <div class="result-top"><div class="result-check">✓</div><div><div class="eyebrow">UJIAN SELESAI</div><h2 id="resultTitle">Hasil Ujian</h2><p id="resultSubtitle">Jawaban telah dikumpulkan.</p></div></div>
+          <div class="score-display"><span>NILAI</span><strong id="scoreValue">0</strong><small id="scoreFraction">0 dari 20 benar</small></div>
+          <div class="result-stats"><div><strong id="correctValue">0</strong><span>Benar</span></div><div><strong id="wrongValue">0</strong><span>Salah</span></div><div><strong id="blankValue">0</strong><span>Kosong</span></div><div><strong id="elapsedValue">00:00</strong><span>Durasi</span></div></div>
+          <div id="recapNotice" class="result-notice hidden"></div>
+          <div class="action-row result-actions"><span class="muted-note">Hasil ditampilkan pada perangkat ini.</span><button id="backHomeButton" class="primary-button" type="button">Kembali ke awal →</button></div>
+        </section>
+      </section>
+    </main>
+    <footer class="footer">Ujian Harian <span>·</span> Aplikasi offline <span>·</span> Data diproses di perangkat ini</footer>
+  </div></div>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  <script src="../Global/zoom.js?v=2"></script>
+  <script>
+    const cacheSuffix = refreshKey ? "&_r=" + encodeURIComponent(refreshKey) : "";
+    const loadScript = (src, next) => {
+      const script = document.createElement("script");
+      script.src = src + cacheSuffix;
+      if (next) script.onload = next;
+      document.body.append(script);
+    };
+    loadScript("../Global/app.js?v=13", () => loadScript("../UH/template.js?v=2"));
+  </script>
+</body>
+</html>

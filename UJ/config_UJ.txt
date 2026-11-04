@@ -1,0 +1,15 @@
+# UJIAN HARIAN - PENGATURAN ADMIN
+# File Excel dipilih manual melalui browser.
+
+sheet_soal;Soal
+sheet_peserta;Peserta
+jumlah_soal;20
+durasi;30
+acak_no;1
+acak_pilihan;1
+rekap;1
+
+# durasi: menit. Isi 0 untuk waktu tanpa batas.
+# acak_no: 1 = acak urutan soal; 0 = ikuti urutan Excel.
+# acak_pilihan: 1 = acak posisi pilihan dan sesuaikan kunci; 0 = urutan tetap.
+# rekap: 1 = boleh pilih nama dan simpan hasil bernama; 0 = rekap dan identitas dimatikan.

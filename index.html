@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Ujian Harian</title>
+</head>
+<body>
+  <p>Membaca pengaturan aplikasi…</p>
+  <script>
+    fetch("Global/config.txt", { cache: "no-store" })
+      .then(response => { if (!response.ok) throw new Error("Pengaturan mode tidak ditemukan."); return response.text(); })
+      .then(text => {
+        const line = text.split(/\r?\n/).map(value => value.trim()).find(value => /^mode\s*;/i.test(value));
+        const mode = line ? line.slice(line.indexOf(";") + 1).trim().toUpperCase() : "";
+        if (!["UH", "UJ"].includes(mode)) throw new Error("Isi mode harus UH atau UJ.");
+        location.replace(new URL(mode + "/", location.href));
+      })
+      .catch(error => { document.body.textContent = error.message; });
+  </script>
+</body>
+</html>

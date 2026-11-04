@@ -1,0 +1,2 @@
+soal;20
+durasi;30
