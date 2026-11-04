@@ -20,13 +20,11 @@
         const headerHeight = header.offsetHeight;
         const availableHeight = Math.max(1, window.innerHeight - headerHeight);
         const availableWidth = Math.max(1, window.innerWidth);
-        const width = availableWidth * zoom;
-        const height = availableHeight * zoom;
         viewport.style.height = availableHeight + "px";
         canvas.style.height = availableHeight + "px";
         canvas.style.setProperty("--canvas-scale", zoom);
-        canvas.style.left = (availableWidth - width) / 2 + "px";
-        canvas.style.top = (availableHeight - height) / 2 + "px";
+        canvas.style.left = "50%";
+        canvas.style.top = "50%";
         level.textContent = Math.round(zoom * 100) + "%";
     }
 
